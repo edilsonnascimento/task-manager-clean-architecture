@@ -1,14 +1,2 @@
 server:
   port: 8090
-
-spring:
-
-  datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=manager-task-db;encrypt=false;trustServerCertificate=true
-    username: sa
-    password: SqlServer@2025
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-
-  flyway:
-    enabled: true
-    locations: classpath:db/migration
