@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  manager-task-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: manager-task-db
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - MSSQL_SA_PASSWORD=SqlServer@2025
+    ports:
+      - "1433:1433"
