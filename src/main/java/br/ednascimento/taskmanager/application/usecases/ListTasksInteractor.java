@@ -16,7 +16,10 @@ public class ListTasksInteractor {
         this.gateway = gateway;
     }
 
-
+    private void validateRepository(TaskGateway taskGateway) {
+        if (Objects.isNull(taskGateway))
+            throw new InvalidCreateGatewayException("error create");
+    }
 
     public List<Task> findAll() {
         return gateway.findAll().orElse(List.of());
