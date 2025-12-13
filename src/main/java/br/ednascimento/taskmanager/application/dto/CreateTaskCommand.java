@@ -27,4 +27,16 @@ public class CreateTaskCommand {
     public String description() {
         return description;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        CreateTaskCommand that = (CreateTaskCommand) o;
+        return Objects.equals(title, that.title) && Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description);
+    }
 }
