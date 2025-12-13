@@ -1,4 +1,4 @@
-package br.ednascimento.taskmanager.application;
+package br.ednascimento.taskmanager.application.service;
 
 import br.ednascimento.taskmanager.application.dto.CreateTaskCommand;
 import br.ednascimento.taskmanager.application.port.out.TaskRepositoryPort;

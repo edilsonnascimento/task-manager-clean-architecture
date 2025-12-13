@@ -1,4 +1,4 @@
-package br.ednascimento.taskmanager.application;
+package br.ednascimento.taskmanager.application.service;
 
 import br.ednascimento.taskmanager.application.dto.CreateTaskCommand;
 import br.ednascimento.taskmanager.application.port.out.TaskRepositoryPort;
@@ -7,7 +7,6 @@ import br.ednascimento.taskmanager.domain.exception.InvalidRepositoryPortExcepti
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 
 import java.util.Optional;
 
