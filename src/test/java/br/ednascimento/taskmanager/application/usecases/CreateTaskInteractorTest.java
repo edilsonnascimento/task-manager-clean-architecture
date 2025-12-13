@@ -3,7 +3,7 @@ package br.ednascimento.taskmanager.application.usecases;
 import br.ednascimento.taskmanager.application.dto.CreateTaskCommand;
 import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
-import br.ednascimento.taskmanager.domain.exception.InvalidRepositoryPortException;
+import br.ednascimento.taskmanager.application.exception.InvalidCreateGatewayException;
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -21,10 +21,10 @@ class CreateTaskInteractorTest {
     void GIVEN_ValidRepository_WHEN_CreateService_THEN_ServiceShouldBeCreated() {
 
         // GIVEN
-        TaskGateway repository = mock(TaskGateway.class);
+        TaskGateway taskGateway = mock(TaskGateway.class);
 
         // WHEN
-        var service = new CreateTaskInteractor(repository);
+        var service = new CreateTaskInteractor(taskGateway);
 
         // THEN
         assertThat(service).isNotNull();
@@ -34,10 +34,10 @@ class CreateTaskInteractorTest {
     void GIVEN_NullRepository_WHEN_CreateService_THEN_ShouldThrowException() {
 
         // GIVEN
-        var expected = "repository null";
+        var expected = "error create";
 
         // WHEN
-        var exception = assertThrows(InvalidRepositoryPortException.class, () -> new CreateTaskInteractor(null));
+        var exception = assertThrows(InvalidCreateGatewayException.class, () -> new CreateTaskInteractor(null));
 
         // THEN
         assertThat(exception.getMessage()).hasToString(expected);
@@ -47,11 +47,11 @@ class CreateTaskInteractorTest {
     void GIVEN_ValidCommand_WHEN_CreateTask_THEN_ShouldSaveTaskAndReturnId() {
 
         // GIVEN
-        TaskGateway repository = mock(TaskGateway.class);
-        CreateTaskInteractor service = new CreateTaskInteractor(repository);
+        TaskGateway taskGateway = mock(TaskGateway.class);
+        CreateTaskInteractor service = new CreateTaskInteractor(taskGateway);
         var command = new CreateTaskCommand("Create service test", "Testing happy path");
         var id = 1L;
-        when(repository.save(any(Task.class))).thenReturn(Optional.of(id));
+        when(taskGateway.save(any(Task.class))).thenReturn(Optional.of(id));
         var expected = 1L;
 
         // WHEN
@@ -61,7 +61,7 @@ class CreateTaskInteractorTest {
         assertThat(actual).isEqualTo(expected);
 
         ArgumentCaptor<Task> captor = ArgumentCaptor.forClass(Task.class);
-        verify(repository).save(captor.capture());
+        verify(taskGateway).save(captor.capture());
         Task savedTask = captor.getValue();
         assertThat(savedTask.getTitle()).isEqualTo(command.title());
         assertThat(savedTask.getDescription()).isEqualTo(command.description());
@@ -71,10 +71,10 @@ class CreateTaskInteractorTest {
     void GIVEN_RepositoryReturnsEmpty_WHEN_CreateTask_THEN_ShouldThrowException() {
 
         // GIVEN
-        TaskGateway repository = mock(TaskGateway.class);
-        CreateTaskInteractor service = new CreateTaskInteractor(repository);
+        TaskGateway taskGateway = mock(TaskGateway.class);
+        CreateTaskInteractor service = new CreateTaskInteractor(taskGateway);
         var command = new CreateTaskCommand("Fail create", "Repository returns empty");
-        when(repository.save(any(Task.class))).thenReturn(Optional.empty());
+        when(taskGateway.save(any(Task.class))).thenReturn(Optional.empty());
         var expected = "Task error create";
 
         // WHEN
