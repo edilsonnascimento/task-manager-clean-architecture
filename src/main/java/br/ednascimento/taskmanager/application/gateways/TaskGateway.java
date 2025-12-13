@@ -11,5 +11,5 @@ public interface TaskGateway {
     Optional<Task> findById(Long id);
     Optional<List<Task>> findAll();
     void update(Task task);
-    void deleteById(Long id);
+    void delete(Long id);
 }
