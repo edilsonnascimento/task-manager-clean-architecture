@@ -1,4 +1,4 @@
 package br.ednascimento.taskmanager.infrastructure.controller;
 
-public class CreateTaskResponse {
+public record CreateTaskResponse(Long id) {
 }

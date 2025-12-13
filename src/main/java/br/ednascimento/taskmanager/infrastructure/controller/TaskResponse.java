@@ -1,4 +1,4 @@
 package br.ednascimento.taskmanager.infrastructure.controller;
 
-public class ListTaskResponse {
+public record TaskResponse(String title, String description) {
 }
