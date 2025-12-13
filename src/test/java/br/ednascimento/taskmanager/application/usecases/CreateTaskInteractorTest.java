@@ -1,7 +1,7 @@
-package br.ednascimento.taskmanager.application.service;
+package br.ednascimento.taskmanager.application.usecases;
 
 import br.ednascimento.taskmanager.application.dto.CreateTaskCommand;
-import br.ednascimento.taskmanager.application.port.out.TaskRepositoryPort;
+import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
 import br.ednascimento.taskmanager.domain.exception.InvalidRepositoryPortException;
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
@@ -15,16 +15,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class CreateTaskServiceTest {
+class CreateTaskInteractorTest {
 
     @Test
     void GIVEN_ValidRepository_WHEN_CreateService_THEN_ServiceShouldBeCreated() {
 
         // GIVEN
-        TaskRepositoryPort repository = mock(TaskRepositoryPort.class);
+        TaskGateway repository = mock(TaskGateway.class);
 
         // WHEN
-        var service = new CreateTaskService(repository);
+        var service = new CreateTaskInteractor(repository);
 
         // THEN
         assertThat(service).isNotNull();
@@ -37,7 +37,7 @@ class CreateTaskServiceTest {
         var expected = "repository null";
 
         // WHEN
-        var exception = assertThrows(InvalidRepositoryPortException.class, () -> new CreateTaskService(null));
+        var exception = assertThrows(InvalidRepositoryPortException.class, () -> new CreateTaskInteractor(null));
 
         // THEN
         assertThat(exception.getMessage()).hasToString(expected);
@@ -47,8 +47,8 @@ class CreateTaskServiceTest {
     void GIVEN_ValidCommand_WHEN_CreateTask_THEN_ShouldSaveTaskAndReturnId() {
 
         // GIVEN
-        TaskRepositoryPort repository = mock(TaskRepositoryPort.class);
-        CreateTaskService service = new CreateTaskService(repository);
+        TaskGateway repository = mock(TaskGateway.class);
+        CreateTaskInteractor service = new CreateTaskInteractor(repository);
         var command = new CreateTaskCommand("Create service test", "Testing happy path");
         var id = 1L;
         when(repository.save(any(Task.class))).thenReturn(Optional.of(id));
@@ -71,8 +71,8 @@ class CreateTaskServiceTest {
     void GIVEN_RepositoryReturnsEmpty_WHEN_CreateTask_THEN_ShouldThrowException() {
 
         // GIVEN
-        TaskRepositoryPort repository = mock(TaskRepositoryPort.class);
-        CreateTaskService service = new CreateTaskService(repository);
+        TaskGateway repository = mock(TaskGateway.class);
+        CreateTaskInteractor service = new CreateTaskInteractor(repository);
         var command = new CreateTaskCommand("Fail create", "Repository returns empty");
         when(repository.save(any(Task.class))).thenReturn(Optional.empty());
         var expected = "Task error create";

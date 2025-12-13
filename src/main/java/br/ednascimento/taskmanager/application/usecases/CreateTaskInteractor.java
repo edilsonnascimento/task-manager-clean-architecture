@@ -1,23 +1,23 @@
-package br.ednascimento.taskmanager.application.service;
+package br.ednascimento.taskmanager.application.usecases;
 
 import br.ednascimento.taskmanager.application.dto.CreateTaskCommand;
-import br.ednascimento.taskmanager.application.port.out.TaskRepositoryPort;
+import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
 import br.ednascimento.taskmanager.domain.exception.InvalidRepositoryPortException;
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
 
 import java.util.Objects;
 
-public class CreateTaskService {
+public class CreateTaskInteractor {
 
-    private final TaskRepositoryPort repository;
+    private final TaskGateway repository;
 
-    public CreateTaskService(TaskRepositoryPort repository) {
+    public CreateTaskInteractor(TaskGateway repository) {
         validateRepository(repository);
         this.repository = Objects.requireNonNull(repository);
     }
 
-    private void validateRepository(TaskRepositoryPort repository) {
+    private void validateRepository(TaskGateway repository) {
         if (Objects.isNull(repository))
             throw new InvalidRepositoryPortException("repository null");
     }
