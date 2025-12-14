@@ -5,6 +5,7 @@ import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
 import br.ednascimento.taskmanager.application.exception.InvalidCreateGatewayException;
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
+import br.ednascimento.taskmanager.infrastructure.persistence.TaskEntity;
 
 import java.util.Objects;
 
@@ -22,8 +23,7 @@ public class CreateTaskInteractor {
             throw new InvalidCreateGatewayException("error create");
     }
 
-    public Long create(CreateTaskCommand command) {
-        var task = new Task(command.title(), command.description());
+    public Long create(Task task) {
         return taskGateway.save(task).orElseThrow(()-> new InvalidTaskException("Task error create"));
     }
 }

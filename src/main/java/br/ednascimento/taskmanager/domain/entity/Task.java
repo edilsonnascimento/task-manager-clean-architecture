@@ -11,7 +11,7 @@ public class Task {
     private String title;
     private String description;
     private TaskStatus status;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdDate;
 
     public Task(String title, String description) {
         validateTitle(title);
@@ -40,8 +40,8 @@ public class Task {
         return status;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
     public void markInProgress() {
@@ -75,14 +75,4 @@ public class Task {
         return Objects.hashCode(id);
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", createdAt=" + createdAt +
-                '}';
-    }
 }

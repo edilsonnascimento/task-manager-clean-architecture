@@ -1,11 +1,13 @@
 package br.ednascimento.taskmanager.application.dto;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class CreateTaskCommand {
 
     private final String title;
     private final String description;
+    LocalDateTime createdAt;
 
     public CreateTaskCommand(String title, String description) {
         validateTitle(title);
@@ -20,12 +22,20 @@ public class CreateTaskCommand {
             throw new IllegalArgumentException("title must not be blank");
     }
 
-    public String title() {
+    public String getTitle() {
         return title;
     }
 
-    public String description() {
+    public String getDescription() {
         return description;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override
