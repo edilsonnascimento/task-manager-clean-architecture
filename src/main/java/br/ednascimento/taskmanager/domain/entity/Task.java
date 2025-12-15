@@ -13,11 +13,12 @@ public class Task {
     private TaskStatus status;
     private LocalDateTime createdDate;
 
-    public Task(String title, String description) {
+    public Task(String title, String description, LocalDateTime createdDate) {
         validateTitle(title);
         this.title = title;
         this.description = description;
         this.status = TaskStatus.PENDING;
+        this.createdDate = createdDate;
     }
 
     public Long getId() {

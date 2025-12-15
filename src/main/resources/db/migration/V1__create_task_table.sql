@@ -1,4 +1,4 @@
-CREATE TABLE Task (
+CREATE TABLE task (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     title NVARCHAR(150) NOT NULL,
     description NVARCHAR(1000) NULL,
@@ -6,5 +6,5 @@ CREATE TABLE Task (
     status NVARCHAR(20) NOT NULL,
 
     CONSTRAINT CK_Task_Status
-      CHECK (Status IN ('PENDING', 'IN_PROGRESS', 'COMPLETED'))
+      CHECK (Status IN ('PENDING', 'IN_PROGRESS', 'DONE'))
 );
