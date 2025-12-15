@@ -13,4 +13,8 @@ public enum TaskStatus {
     public boolean isDone() {
         return this.equals(DONE);
     }
+
+    public boolean isInProgress() {
+        return this.equals(IN_PROGRESS);
+    }
 }

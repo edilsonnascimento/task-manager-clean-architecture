@@ -43,6 +43,13 @@ public class TaskRepositoryGateway implements TaskGateway {
     }
 
     @Override
+    public void updateStatus(Task task) {
+        var taskEntity = taskJdbcRepository.findById(task.getId()).orElseThrow(() -> new InvalidTaskException("Task not found"));
+        taskEntity.setStatus(task.getStatus());
+        taskJdbcRepository.updateStatus(taskEntity);
+    }
+
+    @Override
     public void delete(Long id) {
         taskJdbcRepository.delete(id);
     }

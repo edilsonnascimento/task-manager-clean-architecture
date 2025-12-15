@@ -1,11 +1,9 @@
 package br.ednascimento.taskmanager.application.usecases;
 
-import br.ednascimento.taskmanager.application.dto.CreateTaskCommand;
 import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
 import br.ednascimento.taskmanager.application.exception.InvalidCreateGatewayException;
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
-import br.ednascimento.taskmanager.infrastructure.persistence.TaskEntity;
 
 import java.util.Objects;
 

@@ -5,6 +5,8 @@ import br.ednascimento.taskmanager.domain.entity.TaskStatus;
 import br.ednascimento.taskmanager.infrastructure.persistence.TaskEntity;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class TaskEntityMapperTest {
@@ -14,7 +16,8 @@ class TaskEntityMapperTest {
 
         // GIVEN
         var mapper = new TaskEntityMapper();
-        var task = new Task("Task title", "Task description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Task title", "Task description", createDate);
 
         // WHEN
         var entity = mapper.toEntity(task);

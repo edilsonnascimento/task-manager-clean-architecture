@@ -49,7 +49,7 @@ class UpdateTaskInteractorTest {
         // GIVEN
         var  gateway = mock(TaskGateway.class);
         var interactor = new UpdateTaskInteractor(gateway);
-        var task = new Task("Title", "Description");
+        var task = new Task("Title", "Description", null);
         task.setId(1L);
         when(gateway.findById(1L)).thenReturn(Optional.empty());
         var expected = "Task not found";
@@ -68,7 +68,7 @@ class UpdateTaskInteractorTest {
         // GIVEN
         var gateway = mock(TaskGateway.class);
         var interactor = new UpdateTaskInteractor(gateway);
-        var task = new Task("Updated title", "Updated description");
+        var task = new Task("Updated title", "Updated description", null);
         task.setId(1L);
 
         when(gateway.findById(1L)).thenReturn(Optional.of(task));

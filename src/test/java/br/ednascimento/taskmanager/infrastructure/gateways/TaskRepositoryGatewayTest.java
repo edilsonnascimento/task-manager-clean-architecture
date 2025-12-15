@@ -8,6 +8,7 @@ import br.ednascimento.taskmanager.infrastructure.persistence.TaskJdbcRepository
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,8 @@ class TaskRepositoryGatewayTest {
         var taskJdbcRepository = mock(TaskJdbcRepository.class);
         var taskEntityMapper = mock(TaskEntityMapper.class);
         var gateway = new TaskRepositoryGateway(taskJdbcRepository, taskEntityMapper);
-        var task = new Task("Task title", "Task description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Task title", "Task description", createDate);
         var taskEntity = TaskEntity.builder()
                                    .title("Task title")
                                    .description("Task description")
@@ -54,7 +56,8 @@ class TaskRepositoryGatewayTest {
                 .description("Entity description")
                 .status(TaskStatus.DONE)
                 .build();
-        var taskDomain = new Task("Entity title", "Entity description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var taskDomain = new Task("Entity title", "Entity description", createDate);
         when(taskJdbcRepository.findById(1L)).thenReturn(Optional.of(taskEntity));
         when(taskEntityMapper.toTaskDomain(taskEntity)).thenReturn(taskDomain);
 
@@ -77,8 +80,9 @@ class TaskRepositoryGatewayTest {
         var gateway = new TaskRepositoryGateway(taskJdbcRepository, taskEntityMapper);
         var entity1 = TaskEntity.builder().title("Task 1").description("Desc 1").build();
         var entity2 = TaskEntity.builder().title("Task 2").description("Desc 2").build();
-        var task1 = new Task("Task 1", "Desc 1");
-        var task2 = new Task("Task 2", "Desc 2");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task1 = new Task("Task 1", "Desc 1", createDate);
+        var task2 = new Task("Task 2", "Desc 2", createDate);
         var expected = List.of(task1, task2);
         when(taskJdbcRepository.findAll()).thenReturn(Optional.of(List.of(entity1, entity2)));
         when(taskEntityMapper.toTaskDomain(entity1)).thenReturn(task1);
@@ -99,7 +103,8 @@ class TaskRepositoryGatewayTest {
     void GIVEN_ExistingTask_WHEN_Update_THEN_ShouldUpdateTask() {
 
         // GIVEN
-        var task = new Task("New title", "New description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("New title", "New description", createDate);
         task.setId(1L);
         var taskJdbcRepository = mock(TaskJdbcRepository.class);
         var taskEntityMapper = mock(TaskEntityMapper.class);
@@ -109,8 +114,10 @@ class TaskRepositoryGatewayTest {
                                    .description("Old description")
                                    .build();
         when(taskJdbcRepository.findById(1L)).thenReturn(Optional.of(taskEntity));
-        var expected = TaskEntity.builder().build();
-
+        var expected = TaskEntity.builder()
+                .title("New title")
+                .description("New description")
+                .build();
 
         // WHEN
         gateway.update(task);
@@ -118,8 +125,8 @@ class TaskRepositoryGatewayTest {
         // THEN
         var  captor = ArgumentCaptor.forClass(TaskEntity.class);
         verify(taskJdbcRepository).update(captor.capture());
-        var updatedEntity = captor.getValue();
-        assertThat(updatedEntity).isEqualTo(task);
+        var actual = captor.getValue();
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
@@ -129,8 +136,8 @@ class TaskRepositoryGatewayTest {
         var taskJdbcRepository = mock(TaskJdbcRepository.class);
         var taskEntityMapper = mock(TaskEntityMapper.class);
         var gateway = new TaskRepositoryGateway(taskJdbcRepository, taskEntityMapper);
-
-        var task = new Task("Title", "Description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Title", "Description", createDate);
         task.setId(99L);
 
         when(taskJdbcRepository.findById(99L)).thenReturn(Optional.empty());

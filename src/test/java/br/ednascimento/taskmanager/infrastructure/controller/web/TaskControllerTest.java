@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.web.client.RestClient;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,7 +69,8 @@ class TaskControllerTest {
     void GIVEN_TasksExist_WHEN_ListTasks_THEN_Returns200() {
 
         // GIVEN
-        var task = new Task("Title", "Description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Title", "Description", createDate);
         when(listTasks.findAll()).thenReturn(List.of(task));
 
         // WHEN
@@ -86,7 +88,8 @@ class TaskControllerTest {
     void GIVEN_TaskExists_WHEN_FindById_THEN_Returns200() {
 
         // GIVEN
-        var task = new Task("Title", "Description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Title", "Description", createDate);
         when(findTaskById.finOne(1L)).thenReturn(task);
 
         // WHEN

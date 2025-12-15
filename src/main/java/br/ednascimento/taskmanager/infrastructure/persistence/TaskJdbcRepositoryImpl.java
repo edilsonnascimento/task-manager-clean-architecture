@@ -61,13 +61,21 @@ public class TaskJdbcRepositoryImpl implements TaskJdbcRepository {
         var sql = """
                   UPDATE task
                   SET title = :title,
-                      description = :description,
-                      status = :status
+                      description = :description
                   WHERE id = :id
                   """;
         jdbcClient.sql(sql)
                 .param("title", taskEntity.getTitle())
                 .param("description", taskEntity.getDescription())
+                .param("id", taskEntity.getId())
+                .update();
+    }
+
+    @Override
+    public void updateStatus(TaskEntity taskEntity) {
+
+        var sql = "UPDATE task SET status = :status WHERE id = :id ";
+        jdbcClient.sql(sql)
                 .param("status", taskEntity.getStatus().name())
                 .param("id", taskEntity.getId())
                 .update();

@@ -39,6 +39,16 @@ public class TaskConfig {
     }
 
     @Bean
+    UpdateInProgressTaskInteractor updateInProgressTaskInteractor(TaskGateway gateway) {
+        return new UpdateInProgressTaskInteractor(gateway);
+    }
+
+    @Bean
+    UpdateDoneTaskInteractor updateDoneTaskInteractor(TaskGateway gateway) {
+        return new UpdateDoneTaskInteractor(gateway);
+    }
+
+    @Bean
     DeleteTaskInteractor deleteTaskInteractor(TaskGateway gateway) {
         return new DeleteTaskInteractor(gateway);
     }

@@ -7,6 +7,7 @@ import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +22,8 @@ class DeleteTaskInteractorTest {
         // GIVEN
         var gateway = mock(TaskGateway.class);
         var interactor = new DeleteTaskInteractor(gateway);
-        var task = new Task("Title", "Description");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Title", "Description", createDate);
         task.setId(1L);
         when(gateway.findById(1L)).thenReturn(Optional.of(task));
 

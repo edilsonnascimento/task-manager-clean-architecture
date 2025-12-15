@@ -21,6 +21,16 @@ public class TaskEntityMapper {
     }
 
     public Task toTaskDomain(TaskEntity taskEntity) {
-        return new Task(taskEntity.getTitle(), taskEntity.getDescription());
+        var task = new Task(taskEntity.getTitle(),
+                            taskEntity.getDescription(),
+                            taskEntity.getCreatedDate());
+        task.setId(task.getId());
+        if(taskEntity.getStatus().isInProgress())
+            task.markInProgress();
+        if(taskEntity.getStatus().isDone()) {
+            task.markInProgress();
+            task.markDone();
+        }
+        return task;
     }
 }

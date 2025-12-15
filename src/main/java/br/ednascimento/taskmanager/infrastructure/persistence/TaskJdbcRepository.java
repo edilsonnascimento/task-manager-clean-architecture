@@ -9,4 +9,5 @@ public interface TaskJdbcRepository {
     Optional<List<TaskEntity>> findAll();
     void update(TaskEntity taskEntity);
     void delete(Long id);
+    void updateStatus(TaskEntity taskEntity);
 }
