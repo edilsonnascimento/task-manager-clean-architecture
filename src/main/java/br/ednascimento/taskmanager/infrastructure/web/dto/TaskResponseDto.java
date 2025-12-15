@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 
 public record TaskResponseDto(
+        Long id,
         String title,
         String description,
         TaskStatus taskStatus,
