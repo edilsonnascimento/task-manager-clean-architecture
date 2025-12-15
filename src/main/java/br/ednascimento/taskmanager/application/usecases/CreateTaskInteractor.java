@@ -1,5 +1,6 @@
 package br.ednascimento.taskmanager.application.usecases;
 
+import br.ednascimento.taskmanager.application.dto.CreateTaskCommand;
 import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
 import br.ednascimento.taskmanager.application.exception.InvalidCreateGatewayException;
@@ -21,7 +22,8 @@ public class CreateTaskInteractor {
             throw new InvalidCreateGatewayException("error create");
     }
 
-    public Long create(Task task) {
+    public Long create(CreateTaskCommand command) {
+        var task = new Task(command.title(), command.description());
         return taskGateway.save(task).orElseThrow(()-> new InvalidTaskException("Task error create"));
     }
 }

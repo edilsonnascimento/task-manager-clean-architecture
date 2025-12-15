@@ -33,8 +33,8 @@ class ListTasksInteractorTest {
         // GIVEN
         var gateway = mock(TaskGateway.class);
         var interactor = new ListTasksInteractor(gateway);
-        Task task1 = new Task("Task 1", "Description 1", null);
-        Task task2 = new Task("Task 2", "Description 2", null);
+        Task task1 = new Task("Task 1", "Description 1");
+        Task task2 = new Task("Task 2", "Description 2");
         when(gateway.findAll()).thenReturn(Optional.of(List.of(task1, task2)));
         var expected = List.of(task1, task2);
 

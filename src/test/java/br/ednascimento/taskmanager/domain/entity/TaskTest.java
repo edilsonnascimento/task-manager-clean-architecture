@@ -16,10 +16,10 @@ class TaskTest {
         // GIVEN
         var title = "Study Clean Architecture";
         var description = "Read and practice clean architecture concepts";
-        var expected = new Task(title, description, null);
+        var expected = new Task(title, description);
 
         // WHEN
-        var actual = new Task(title, description, null);
+        var actual = new Task(title, description);
 
         // THEN
         assertThat(actual).isEqualTo(expected);
@@ -31,8 +31,8 @@ class TaskTest {
         // GIVEN
         var title = "Write tests";
         var description = "Create unit tests for domain layer";
-        var task = new Task(title, description, null);
-        var expected = new Task(title, description, null);
+        var task = new Task(title, description);
+        var expected = new Task(title, description);
         expected.markInProgress();
 
         // WHEN
@@ -48,9 +48,9 @@ class TaskTest {
         // GIVEN
         var title = "Finish feature";
         var description = "Complete ST-001 implementation";
-        var task = new Task(title, description, null);
+        var task = new Task(title, description);
         task.markInProgress();
-        var expected = new Task(title, description, null);
+        var expected = new Task(title, description);
         expected.markInProgress();
         expected.markDone();
 
@@ -67,7 +67,7 @@ class TaskTest {
         // GIVEN
         var title = "Invalid transition";
         var description = "Test invalid state";
-        var task = new Task(title, description, null);
+        var task = new Task(title, description);
         task.markInProgress();
         var expected = "Only PENDING tasks can be started";
 
@@ -86,7 +86,7 @@ class TaskTest {
         var expected = "title must not be null";
 
         // WHEN
-        var exception = assertThrows(IllegalArgumentException.class, () -> new Task(null, description, null));
+        var exception = assertThrows(IllegalArgumentException.class, () -> new Task(null, description));
 
         // THEN
         assertThat(exception.getMessage()).hasToString(expected);
@@ -100,7 +100,7 @@ class TaskTest {
         var expected = "title must not be blank";
 
         // WHEN
-        var exception = assertThrows(IllegalArgumentException.class, () -> new Task("", description, null));
+        var exception = assertThrows(IllegalArgumentException.class, () -> new Task("", description));
 
         // THEN
         assertThat(exception.getMessage()).hasToString(expected);
@@ -112,7 +112,7 @@ class TaskTest {
         // GIVEN
         var title = "Invalid done";
         var description = "Task not started";
-        var task = new Task(title, description, null);
+        var task = new Task(title, description);
         var expected = "Only IN_PROGRESS tasks can be completed";
 
         // WHEN
@@ -128,7 +128,7 @@ class TaskTest {
         // GIVEN
         var title = "Title default";
         var description = "Description default";
-        var task = new Task(title, description, null);
+        var task = new Task(title, description);
         var id = 10L;
         var expected = 10L;
 
@@ -143,8 +143,8 @@ class TaskTest {
     void GIVEN_TwoTasksWithSameId_WHEN_Compare_THEN_ShouldBeEqual() {
 
         // GIVEN
-        var task1 = new Task("Task 1", "Description", null);
-        var task2 = new Task("Task 2", "Another description", null);
+        var task1 = new Task("Task 1", "Description");
+        var task2 = new Task("Task 2", "Another description");
         task1.setId(1L);
         task2.setId(1L);
 
@@ -156,7 +156,7 @@ class TaskTest {
     void GIVEN_Task_WHEN_CompareWithNull_THEN_ShouldNotBeEqual() {
 
         // GIVEN
-        var task = new Task("Task", "Description", null);
+        var task = new Task("Task", "Description");
 
         // WHEN / THEN
         assertThat(task.equals(null)).isFalse();
@@ -168,7 +168,7 @@ class TaskTest {
         // GIVEN
         var title = "Task title";
         var description = "Task description";
-        var task = new Task(title, description, null);
+        var task = new Task(title, description);
 
         // WHEN
         var actual = task.getDescription();
@@ -183,10 +183,10 @@ class TaskTest {
         // GIVEN
         var title = "Task title";
         var description = "Task description";
-        var task = new Task(title, description, null);
+        var task = new Task(title, description);
 
         // WHEN
-        var actual = task.getCreatedDate();
+        var actual = task.getCreatedAt();
 
         // THEN
         assertThat(actual).isNull();
@@ -196,7 +196,7 @@ class TaskTest {
     void GIVEN_TaskWithId_WHEN_HashCodeCalled_THEN_ShouldReturnHashBasedOnId() {
 
         // GIVEN
-        var task = new Task("Task", "Hash test", null);
+        var task = new Task("Task", "Hash test");
         task.setId(100L);
         var expected = Objects.hashCode(100L);
 
@@ -213,7 +213,7 @@ class TaskTest {
         // GIVEN
         var title = "Task title";
         var description = "Task description";
-        var task = new Task(title, description, null);
+        var task = new Task(title, description);
         var expected = "Task title";
 
         // WHEN

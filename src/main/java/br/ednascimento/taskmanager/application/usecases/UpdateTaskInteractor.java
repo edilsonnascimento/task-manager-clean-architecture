@@ -3,7 +3,6 @@ package br.ednascimento.taskmanager.application.usecases;
 import br.ednascimento.taskmanager.application.exception.InvalidCreateGatewayException;
 import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
-import br.ednascimento.taskmanager.domain.entity.TaskStatus;
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
 
 import java.util.Objects;
@@ -13,11 +12,11 @@ public class UpdateTaskInteractor {
     private final TaskGateway gateway;
 
     public UpdateTaskInteractor(TaskGateway gateway) {
-        requireGateway(gateway);
+        validateRepository(gateway);
         this.gateway = gateway;
     }
 
-    private void requireGateway(TaskGateway taskGateway) {
+    private void validateRepository(TaskGateway taskGateway) {
         if (Objects.isNull(taskGateway))
             throw new InvalidCreateGatewayException("error create");
     }

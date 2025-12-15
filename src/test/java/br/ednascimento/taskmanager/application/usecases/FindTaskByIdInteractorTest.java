@@ -7,7 +7,6 @@ import br.ednascimento.taskmanager.domain.entity.Task;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,11 +21,10 @@ class FindTaskByIdInteractorTest {
         // GIVEN
         var gateway = mock(TaskGateway.class);
         FindTaskByIdInteractor interactor = new FindTaskByIdInteractor(gateway);
-        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
-        var task = new Task("Task title", "Task description", createDate);
+        var task = new Task("Task title", "Task description");
         task.setId(1L);
         when(gateway.findById(1L)).thenReturn(Optional.of(task));
-        var expected = new Task("Task title", "Task description", createDate);
+        var expected = new Task("Task title", "Task description");
         expected.setId(1L);
 
         // WHEN
@@ -67,4 +65,8 @@ class FindTaskByIdInteractorTest {
         // THEN
         assertThat(exception.getMessage()).isEqualTo(expected);
     }
+
+
+
+
 }
