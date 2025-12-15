@@ -11,13 +11,14 @@ public class Task {
     private String title;
     private String description;
     private TaskStatus status;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdDate;
 
-    public Task(String title, String description) {
+    public Task(String title, String description, LocalDateTime createdDate) {
         validateTitle(title);
         this.title = title;
         this.description = description;
         this.status = TaskStatus.PENDING;
+        this.createdDate = createdDate;
     }
 
     public Long getId() {
@@ -40,8 +41,8 @@ public class Task {
         return status;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
     }
 
     public void markInProgress() {
@@ -82,7 +83,7 @@ public class Task {
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
-                ", createdAt=" + createdAt +
+                ", createdDate=" + createdDate +
                 '}';
     }
 }
