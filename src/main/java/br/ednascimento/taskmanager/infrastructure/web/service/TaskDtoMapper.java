@@ -15,7 +15,8 @@ public class TaskDtoMapper {
     }
 
     public TaskResponseDto TaskDomainToTaskResponse(Task taskDomain) {
-        return new TaskResponseDto(taskDomain.getTitle(),
+        return new TaskResponseDto(taskDomain.getId(),
+                                   taskDomain.getTitle(),
                                    taskDomain.getDescription(),
                                    taskDomain.getStatus(),
                                    taskDomain.getCreatedDate());

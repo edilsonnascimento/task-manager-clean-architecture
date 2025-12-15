@@ -24,7 +24,7 @@ public class TaskEntityMapper {
         var task = new Task(taskEntity.getTitle(),
                             taskEntity.getDescription(),
                             taskEntity.getCreatedDate());
-        task.setId(task.getId());
+        task.setId(taskEntity.getId());
         if(taskEntity.getStatus().isInProgress())
             task.markInProgress();
         if(taskEntity.getStatus().isDone()) {
