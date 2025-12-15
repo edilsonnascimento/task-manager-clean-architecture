@@ -186,7 +186,7 @@ class TaskTest {
         var task = new Task(title, description);
 
         // WHEN
-        var actual = task.getCreatedAt();
+        var actual = task.getCreatedDate();
 
         // THEN
         assertThat(actual).isNull();

@@ -1,4 +1,4 @@
-package br.ednascimento.taskmanager.infrastructure.controller;
+package br.ednascimento.taskmanager.infrastructure.controller.web;
 
 import br.ednascimento.taskmanager.application.usecases.*;
 import br.ednascimento.taskmanager.domain.entity.Task;
