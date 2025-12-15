@@ -7,6 +7,7 @@ import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,7 +49,8 @@ class CreateTaskInteractorTest {
         // GIVEN
         var taskGateway = mock(TaskGateway.class);
         var service = new CreateTaskInteractor(taskGateway);
-        var task = new Task("Create task test", "Description happy path");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Create task test", "Description happy path", createDate);
         var id = 1L;
         when(taskGateway.save(any(Task.class))).thenReturn(Optional.of(id));
         var expected = 1L;
@@ -71,7 +73,8 @@ class CreateTaskInteractorTest {
         // GIVEN
         var taskGateway = mock(TaskGateway.class);
         var service = new CreateTaskInteractor(taskGateway);
-        var task = new Task("Title teste", "Description Teste");
+        var createDate = LocalDateTime.of(2025, 12,15, 14,0,0);
+        var task = new Task("Title teste", "Description Teste", createDate);
         when(taskGateway.save(any(Task.class))).thenReturn(Optional.empty());
         var expected = "Task error create";
 
