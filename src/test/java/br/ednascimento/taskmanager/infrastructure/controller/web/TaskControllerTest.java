@@ -1,7 +1,8 @@
-package br.ednascimento.taskmanager.infrastructure.controller;
+package br.ednascimento.taskmanager.infrastructure.controller.web;
 
 import br.ednascimento.taskmanager.application.usecases.*;
 import br.ednascimento.taskmanager.domain.entity.Task;
+import br.ednascimento.taskmanager.infrastructure.web.dto.TaskResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -92,7 +93,7 @@ class TaskControllerTest {
         var response = client().get()
                 .uri("/v1/tasks/1")
                 .retrieve()
-                .toEntity(TaskResponse.class);
+                .toEntity(TaskResponseDto.class);
 
         // THEN
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
