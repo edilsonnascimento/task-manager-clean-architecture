@@ -1,4 +1,4 @@
-# 🚀 Task Manager API — Final Delivery README
+# 🚀 Task Manager API
 
 API RESTful para gerenciamento de tarefas (**To-Do List**), desenvolvida em **Java 21** com **Spring Boot 4**, seguindo os princípios da **Clean Architecture**, utilizando **JDBC puro**, **SQL Server**, **Flyway** e **Docker**.
 
@@ -47,6 +47,7 @@ src/main/java/br/ednascimento/taskmanager
 │   ├── gateways
 │   ├── persistence
 │   └── web
+└── main
 └── TaskManagerCleanArchitectureApplication.java
 ```
 
@@ -102,7 +103,12 @@ curl -X PUT http://localhost:8090/v1/tasks/1 \
 
 ```bash
 curl -X PATCH http://localhost:8090/v1/tasks/1/done
+```
+
+```bash
 curl -X PATCH http://localhost:8090/v1/tasks/1/in-progress
+```
+bash
 curl -X DELETE http://localhost:8090/v1/tasks/1
 ```
 
