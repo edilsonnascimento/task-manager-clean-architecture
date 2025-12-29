@@ -6,18 +6,17 @@ import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class FindTaskByIdInteractor {
 
     private final TaskGateway gateway;
 
     public FindTaskByIdInteractor(TaskGateway gateway) {
-        validateRepository(gateway);
+        requireGateway(gateway);
         this.gateway = gateway;
     }
 
-    private void validateRepository(TaskGateway taskGateway) {
+    private void requireGateway(TaskGateway taskGateway) {
         if (Objects.isNull(taskGateway))
             throw new InvalidCreateGatewayException("error create");
     }
