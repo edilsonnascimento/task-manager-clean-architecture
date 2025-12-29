@@ -1,14 +1,14 @@
-package br.ednascimento.taskmanager.infrastructure.web.service;
+package br.ednascimento.taskmanager.infrastructure.web.adapter;
 
 import br.ednascimento.taskmanager.application.usecases.UpdateDoneTaskInteractor;
 import br.ednascimento.taskmanager.application.usecases.UpdateInProgressTaskInteractor;
-import br.ednascimento.taskmanager.application.usecases.UpdateTaskInteractor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service
-public class PatchStatusService {
+@Component
+public class PatchStatusHttpAdapter {
 
     private final UpdateInProgressTaskInteractor updateInProgressStatus;
     private final UpdateDoneTaskInteractor updateDonesStatus;

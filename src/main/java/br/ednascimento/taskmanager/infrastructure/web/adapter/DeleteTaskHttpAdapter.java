@@ -1,12 +1,13 @@
-package br.ednascimento.taskmanager.infrastructure.web.service;
+package br.ednascimento.taskmanager.infrastructure.web.adapter;
 
 import br.ednascimento.taskmanager.application.usecases.DeleteTaskInteractor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service
-public class DeleteTaskService {
+@Component
+public class DeleteTaskHttpAdapter {
 
     private final DeleteTaskInteractor deleteTaskInteractor;
 

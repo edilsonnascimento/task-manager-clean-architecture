@@ -5,7 +5,7 @@ import br.ednascimento.taskmanager.application.usecases.*;
 import br.ednascimento.taskmanager.infrastructure.gateways.TaskEntityMapper;
 import br.ednascimento.taskmanager.infrastructure.gateways.TaskRepositoryGateway;
 import br.ednascimento.taskmanager.infrastructure.persistence.TaskJdbcRepository;
-import br.ednascimento.taskmanager.infrastructure.web.service.CreateTaskService;
+import br.ednascimento.taskmanager.infrastructure.web.adapter.DeleteTaskHttpAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

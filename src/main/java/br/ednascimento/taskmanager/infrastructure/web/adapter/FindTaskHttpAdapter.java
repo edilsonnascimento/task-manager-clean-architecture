@@ -1,14 +1,14 @@
-package br.ednascimento.taskmanager.infrastructure.web.service;
+package br.ednascimento.taskmanager.infrastructure.web.adapter;
 
-import br.ednascimento.taskmanager.application.usecases.CreateTaskInteractor;
 import br.ednascimento.taskmanager.application.usecases.FindTaskByIdInteractor;
 import br.ednascimento.taskmanager.infrastructure.web.dto.TaskResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Service
-public class FindTaskService {
+@Component
+public class FindTaskHttpAdapter {
 
     private final FindTaskByIdInteractor findTaskByIdInteractor;
     private final TaskDtoMapper mapper;
