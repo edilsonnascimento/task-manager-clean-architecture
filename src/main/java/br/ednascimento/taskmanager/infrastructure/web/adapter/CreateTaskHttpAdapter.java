@@ -21,7 +21,7 @@ public class CreateTaskHttpAdapter {
     public ResponseEntity<CreateTaskResponseDto> create(CreateTaskRequestDto request) throws URISyntaxException {
         var taskDomain = mapper.createTaskRequestDtoToTaskDomain(request);
         var id = createTaskInteractor.create(taskDomain);
-        URI uri = new URI("/v1/tasks/" + id);
+        var uri = new URI("/v1/tasks/" + id);
         return ResponseEntity.created(uri).build();
     }
 }
