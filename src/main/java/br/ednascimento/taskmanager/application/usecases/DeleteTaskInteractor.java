@@ -11,11 +11,11 @@ public class DeleteTaskInteractor {
     private final TaskGateway gateway;
 
     public DeleteTaskInteractor(TaskGateway gateway) {
-        validateRepository(gateway);
+        requireGateway(gateway);
         this.gateway = gateway;
     }
 
-    private void validateRepository(TaskGateway taskGateway) {
+    private void requireGateway(TaskGateway taskGateway) {
         if (Objects.isNull(taskGateway))
             throw new InvalidCreateGatewayException("error create");
     }

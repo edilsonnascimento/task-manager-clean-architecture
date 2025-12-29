@@ -12,11 +12,11 @@ public class CreateTaskInteractor {
     private final TaskGateway taskGateway;
 
     public CreateTaskInteractor(TaskGateway taskGateway) {
-        validateRepository(taskGateway);
+        requireGateway(taskGateway);
         this.taskGateway = taskGateway;
     }
 
-    private void validateRepository(TaskGateway taskGateway) {
+    private void requireGateway(TaskGateway taskGateway) {
         if (Objects.isNull(taskGateway))
             throw new InvalidCreateGatewayException("error create");
     }
