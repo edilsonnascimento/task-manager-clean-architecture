@@ -2,6 +2,7 @@ package br.ednascimento.taskmanager.infrastructure.controller.web;
 
 import br.ednascimento.taskmanager.application.usecases.*;
 import br.ednascimento.taskmanager.domain.entity.Task;
+import br.ednascimento.taskmanager.infrastructure.web.adapter.DeleteTaskHttpAdapter;
 import br.ednascimento.taskmanager.infrastructure.web.dto.TaskResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +20,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+        properties = {
+                "spring.flyway.enabled=false",
+                "spring.datasource.url=jdbc:h2:mem:test"
+        }
+)
 class TaskControllerTest {
 
     @LocalServerPort
@@ -33,7 +40,7 @@ class TaskControllerTest {
     @MockitoBean
     private UpdateTaskInteractor updateTask;
     @MockitoBean
-    private DeleteTaskInteractor deleteTask;
+    private DeleteTaskHttpAdapter deleteTask;
 
     private RestClient client() {
         return RestClient.create("http://localhost:" + port);

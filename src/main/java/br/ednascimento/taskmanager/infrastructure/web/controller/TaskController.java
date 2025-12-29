@@ -1,9 +1,7 @@
 package br.ednascimento.taskmanager.infrastructure.web.controller;
 
-import br.ednascimento.taskmanager.application.usecases.DeleteTaskInteractor;
-import br.ednascimento.taskmanager.domain.entity.TaskStatus;
 import br.ednascimento.taskmanager.infrastructure.web.dto.*;
-import br.ednascimento.taskmanager.infrastructure.web.service.*;
+import br.ednascimento.taskmanager.infrastructure.web.adapter.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,46 +14,46 @@ import java.util.List;
 @RequestMapping("v1/tasks")
 public class TaskController {
 
-    private final CreateTaskService createTaskService;
-    private final FindTasksService findTasksService;
-    private final FindTaskService findTaskService;
-    private final UpdateTaskService updateTaskService;
-    private final DeleteTaskInteractor deleteTaskInteractor;
-    private final PatchStatusService patchStatusService;
+    private final CreateTaskHttpAdapter createTaskHttpAdapter;
+    private final FindTasksHttpAdapter findTasksHttpAdapter;
+    private final FindTaskHttpAdapter findTaskHttpAdapter;
+    private final UpdateTaskHttpAdapter updateTaskHttpAdapter;
+    private final DeleteTaskHttpAdapter deleteTaskHttpAdapter;
+    private final PatchStatusHttpAdapter patchStatusHttpAdapter;
 
     @PostMapping
     public ResponseEntity<CreateTaskResponseDto> create(@RequestBody CreateTaskRequestDto request) throws URISyntaxException {
-        return createTaskService.create(request);
+        return createTaskHttpAdapter.create(request);
     }
 
     @GetMapping
     public List<TaskResponseDto> list() {
-        return findTasksService.find();
+        return findTasksHttpAdapter.find();
     }
 
     @GetMapping("/{id}")
     public TaskResponseDto findById(@PathVariable Long id) {
-        return findTaskService.find(id);
+        return findTaskHttpAdapter.find(id);
     }
 
     @PutMapping("/{id}")
     public void update(@PathVariable Long id, @RequestBody UpdateTaskRequestDto updateTaskRequestDto) {
         updateTaskRequestDto.setId(id);
-        updateTaskService.update(updateTaskRequestDto);
+        updateTaskHttpAdapter.update(updateTaskRequestDto);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        deleteTaskInteractor.delete(id);
+        deleteTaskHttpAdapter.delete(id);
     }
 
     @PatchMapping("/{id}/in-progress")
     public void patchInProgress(@PathVariable Long id) {
-        patchStatusService.updateInProgressStatus(id);
+        patchStatusHttpAdapter.updateInProgressStatus(id);
     }
 
     @PatchMapping("/{id}/done")
     public void patchDone(@PathVariable Long id) {
-        patchStatusService.updateDoneStatus(id);
+        patchStatusHttpAdapter.updateDoneStatus(id);
     }
 }

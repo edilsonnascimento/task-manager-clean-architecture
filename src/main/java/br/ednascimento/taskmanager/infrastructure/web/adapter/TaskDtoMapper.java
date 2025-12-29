@@ -1,9 +1,8 @@
-package br.ednascimento.taskmanager.infrastructure.web.service;
+package br.ednascimento.taskmanager.infrastructure.web.adapter;
 
 import br.ednascimento.taskmanager.domain.entity.Task;
 import br.ednascimento.taskmanager.infrastructure.web.dto.CreateTaskRequestDto;
 import br.ednascimento.taskmanager.infrastructure.web.dto.TaskResponseDto;
-import br.ednascimento.taskmanager.infrastructure.web.dto.UpdateStatusTaskRequestDto;
 import br.ednascimento.taskmanager.infrastructure.web.dto.UpdateTaskRequestDto;
 import org.springframework.stereotype.Component;
 

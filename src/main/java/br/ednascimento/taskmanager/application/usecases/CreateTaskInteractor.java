@@ -13,7 +13,7 @@ public class CreateTaskInteractor {
 
     public CreateTaskInteractor(TaskGateway taskGateway) {
         validateRepository(taskGateway);
-        this.taskGateway = Objects.requireNonNull(taskGateway);
+        this.taskGateway = taskGateway;
     }
 
     private void validateRepository(TaskGateway taskGateway) {
