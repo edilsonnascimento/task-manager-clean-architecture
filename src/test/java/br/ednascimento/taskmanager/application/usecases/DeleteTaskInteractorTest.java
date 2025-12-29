@@ -4,7 +4,7 @@ import br.ednascimento.taskmanager.application.exception.InvalidCreateGatewayExc
 import br.ednascimento.taskmanager.application.gateways.TaskGateway;
 import br.ednascimento.taskmanager.domain.entity.Task;
 import br.ednascimento.taskmanager.domain.exception.InvalidTaskException;
-import org.assertj.core.api.Assertions;
+import br.ednascimento.taskmanager.infrastructure.web.adapter.DeleteTaskHttpAdapter;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -81,7 +81,4 @@ class DeleteTaskInteractorTest {
         assertThat(exception.getMessage()).isEqualTo(expected);
         verify(gateway, never()).delete(any());
     }
-
-
-
 }
